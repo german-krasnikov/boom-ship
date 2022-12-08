@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Code.PathFind
+namespace Code.Metro
 {
     public class MetroCalculator : MonoBehaviour
     {

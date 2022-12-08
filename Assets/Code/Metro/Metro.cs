@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Metro.Graph;
 using UnityEngine;
-using static Code.PathFind.MetroHelper;
+using static Code.Metro.MetroHelper;
 using Random = UnityEngine.Random;
 
-namespace Code.PathFind
+namespace Code.Metro
 {
     public class Metro
     {
         public readonly string[] STATION_NAMES = { "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "O" };
         private readonly Color[] SUBWAY_COLORS = { Color.black, Color.red, Color.green, Color.blue };
 
-        private Graph _metro;
+        private Graph.Graph _metro;
         private Dictionary<Color, SubwayLine> _subways;
         private Dictionary<string, Node> _stations;
 
         public void Initialize()
         {
-            _metro = new Graph();
+            _metro = new Graph.Graph();
 
             _subways = InitSubways(SUBWAY_COLORS);
             _stations = InitStations(STATION_NAMES);

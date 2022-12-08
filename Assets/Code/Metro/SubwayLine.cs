@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Code.PathFind
+namespace Code.Metro
 {
     public class SubwayLine
     {

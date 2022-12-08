@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Code.Metro.Graph;
 using UnityEngine;
 
-namespace Code.PathFind
+namespace Code.Metro
 {
     public static class MetroHelper
     {
