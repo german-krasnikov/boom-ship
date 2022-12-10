@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Data;
 using Code.Infrastructure.AssetManagement;
+using Code.Logic;
 using Code.Ship.Health;
 using UnityEngine;
 
@@ -43,9 +44,10 @@ namespace Code.Module.Weapon
             bulletService.bullets.Add(bullet);
             weapon.Cooldown.Reset();
             Debug.Log("Shot " + enemy.Health.GetTotal());
-            var bulletUI = _assetProvider.Instantiate(AssetPath.BulletPath, ship.UI.transform.position);
+            var bulletUI = _assetProvider.Instantiate(AssetPath.BulletPath, weapon.UI.transform.position);
             bulletUI.GetComponent<BulletUI>().StartCoroutine(
-                bulletUI.GetComponent<BulletUI>().MoveOverSeconds(bulletUI, enemy.UI, bullet.Cooldown.Current));
+                MoveOverSeconds.Move(bulletUI, enemy.UI, bullet.Cooldown.Current));
+            bullet.UI = bulletUI;
         }
     }
 }

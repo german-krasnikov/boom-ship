@@ -13,13 +13,14 @@ namespace Code.Infrastructure
         private List<Ship.Ship> _enemies = new List<Ship.Ship>();
         private ShipService _shipService = new ShipService();
 
-        public void Init(GameObject shipUI, GameObject enemyUI)
+        public void Init(GameObject shipUI, GameObject enemyUI, GameObject weaponUI)
         {
             _ship = new Ship.Ship();
             _ship.UI = shipUI;
             _ship.Health.Shield.Value = 90;
             //_ship.Health.Shield.IncCooldown.BaseCooldown = 2;
             var weapon = new Weapon();
+            weapon.UI = weaponUI;
             weapon.Cooldown.Set(4);
             _ship.AddModule(weapon);
             _ship.AddModule(new SpeedupRestoreShieldModule());

@@ -32,6 +32,7 @@ namespace Code.Module.Weapon
         {
             healthService.TakeDamage(bullet.Damage, bullet.Target);
             Debug.Log("Done " + bullet.Target.Health.GetTotal());
+            Object.Destroy(bullet.UI);
         }
     }
 }

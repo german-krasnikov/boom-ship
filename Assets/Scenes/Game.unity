@@ -1033,6 +1033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ship: {fileID: 1842956802}
   Enemy: {fileID: 1287413439}
+  Weapon: {fileID: 369199408}
 --- !u!4 &2051939329
 Transform:
   m_ObjectHideFlags: 0

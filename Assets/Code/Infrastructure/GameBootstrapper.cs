@@ -7,12 +7,13 @@ namespace Code.Infrastructure
     {
         public GameObject Ship;
         public GameObject Enemy;
+        public GameObject Weapon;
         private Game _game;
 
         public void Awake()
         {
             _game = new Game();
-            _game.Init(Ship,Enemy);
+            _game.Init(Ship, Enemy, Weapon);
             DontDestroyOnLoad(this);
         }
 
