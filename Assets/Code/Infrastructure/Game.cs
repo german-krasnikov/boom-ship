@@ -11,7 +11,12 @@ namespace Code.Infrastructure
     {
         private Ship.Ship _ship;
         private List<Ship.Ship> _enemies = new List<Ship.Ship>();
-        private ShipService _shipService = new ShipService();
+        private IShipService _shipService;
+
+        public Game(IShipService shipService)
+        {
+            _shipService = shipService;
+        }
 
         public void Init(GameObject shipUI, GameObject enemyUI, GameObject weaponUI)
         {

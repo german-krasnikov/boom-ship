@@ -6,15 +6,22 @@ namespace Code.Ship
 {
     public class ShipService : IShipService
     {
-        private HealthService _healthService = new HealthService();
-        private WeaponService _weaponService = new WeaponService();
-        private BulletService _bulletService = new BulletService();
+        private IHealthService _healthService;
+        private IWeaponService _weaponService;
+        private IBulletService _bulletService;
+
+        public ShipService(IHealthService healthService, IWeaponService weaponService, IBulletService bulletService)
+        {
+            _healthService = healthService;
+            _weaponService = weaponService;
+            _bulletService = bulletService;
+        }
 
         public void Tick(float tick, Ship ship, List<Ship> enemies)
         {
             _healthService.Tick(tick, ship);
-            _weaponService.Tick(tick, ship, enemies, _bulletService);
-            _bulletService.Tick(tick, _healthService);
+            _weaponService.Tick(tick, ship, enemies);
+            _bulletService.Tick(tick);
         }
     }
 }

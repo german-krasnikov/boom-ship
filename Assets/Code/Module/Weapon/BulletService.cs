@@ -7,9 +7,15 @@ namespace Code.Module.Weapon
 {
     public class BulletService : IBulletService
     {
-        public List<Bullet> bullets = new List<Bullet>();
+        private IHealthService _healthService;
+        private List<Bullet> bullets = new List<Bullet>();
 
-        public void Tick(float tick, HealthService healthService)
+        public BulletService(IHealthService healthService)
+        {
+            _healthService = healthService;
+        }
+
+        public void Tick(float tick)
         {
             for (int i = bullets.Count - 1; i >= 0; i--)
             {
@@ -18,10 +24,15 @@ namespace Code.Module.Weapon
 
                 if (bullet.Done())
                 {
-                    MakeDamage(bullet, healthService);
+                    MakeDamage(bullet);
                     bullets.RemoveAt(i);
                 }
             }
+        }
+
+        public void AddBullet(Bullet bullet)
+        {
+            bullets.Add(bullet);
         }
 
         private void TickBullet(float tick, Bullet bullet)
@@ -29,9 +40,9 @@ namespace Code.Module.Weapon
             bullet.Cooldown.Tick(tick);
         }
 
-        private void MakeDamage(Bullet bullet, HealthService healthService)
+        private void MakeDamage(Bullet bullet)
         {
-            healthService.TakeDamage(bullet.Damage, bullet.Target);
+            _healthService.TakeDamage(bullet.Damage, bullet.Target);
             Debug.Log("Done " + bullet.Target.Health.GetTotal());
             Object.Destroy(bullet.UI);
         }

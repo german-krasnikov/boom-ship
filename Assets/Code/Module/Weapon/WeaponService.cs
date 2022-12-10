@@ -9,9 +9,16 @@ namespace Code.Module.Weapon
 {
     public class WeaponService : IWeaponService
     {
-        private AssetProviderProvider _assetProviderProvider = new AssetProviderProvider();
+        private IAssetProvider _assetProvider;
+        private IBulletService _bulletService;
 
-        public void Tick(float tick, Ship.Ship ship, List<Ship.Ship> enemies, BulletService bulletService)
+        public WeaponService(IAssetProvider assetProvider, IBulletService bulletService)
+        {
+            _assetProvider = assetProvider;
+            _bulletService = bulletService;
+        }
+
+        public void Tick(float tick, Ship.Ship ship, List<Ship.Ship> enemies)
         {
             foreach (var weapon in ship.Weapons())
             {
@@ -20,7 +27,7 @@ namespace Code.Module.Weapon
                 {
                     var enemy = FindEnemyForShot(enemies, weapon);
                     if (enemy != null)
-                        Shot(enemy, ship, weapon, bulletService);
+                        Shot(enemy, ship, weapon);
                 }
             }
         }
@@ -32,7 +39,7 @@ namespace Code.Module.Weapon
 
         private Ship.Ship FindEnemyForShot(List<Ship.Ship> enemies, Weapon weapon) => enemies.FirstOrDefault();
 
-        private void Shot(Ship.Ship enemy, Ship.Ship ship, Weapon weapon, BulletService bulletService)
+        private void Shot(Ship.Ship enemy, Ship.Ship ship, Weapon weapon)
         {
             var bullet = new Bullet
             {
@@ -40,10 +47,10 @@ namespace Code.Module.Weapon
                 Target = enemy,
             };
             bullet.Cooldown.Set(weapon.BulletTime);
-            bulletService.bullets.Add(bullet);
+            _bulletService.AddBullet(bullet);
             weapon.Cooldown.Reset();
             Debug.Log("Shot " + enemy.Health.GetTotal());
-            var bulletUI = _assetProviderProvider.Instantiate(AssetPath.BulletPath, weapon.UI.transform.position);
+            var bulletUI = _assetProvider.Instantiate(AssetPath.BulletPath, weapon.UI.transform.position);
             bulletUI.GetComponent<BulletUI>().StartCoroutine(
                 MoveOverSeconds.Move(bulletUI, enemy.UI, bullet.Cooldown.Current));
             bullet.UI = bulletUI;

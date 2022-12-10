@@ -5,6 +5,7 @@ namespace Code.Module.Weapon
 {
     public interface IBulletService : IService
     {
-        void Tick(float tick, HealthService healthService);
+        void Tick(float tick);
+        void AddBullet(Bullet bullet);
     }
 }
