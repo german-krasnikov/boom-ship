@@ -2,10 +2,10 @@ using System.Linq;
 
 namespace Code.Ship.Health
 {
-    public class HealthService
+    public class HealthService : IHealthService
     {
         private ShieldService _shieldService = new ShieldService();
-        private HPService _hpService = new HPService();
+        private IHPService _hpService = new HPService();
 
         public void Tick(float tick, Ship ship)
         {

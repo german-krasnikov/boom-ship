@@ -1,5 +1,3 @@
-using Code.Data;
-
 namespace Code.Module.Health
 {
     public class AdditionalHPModule : BaseModule

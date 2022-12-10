@@ -1,4 +1,4 @@
-using Code.Data;
+using Code.Logic;
 using UnityEngine;
 
 namespace Code.Module.Weapon

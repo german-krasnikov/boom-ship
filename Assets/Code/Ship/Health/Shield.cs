@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Data;
+using Code.Logic;
 using Code.Module.Health;
 
 namespace Code.Ship.Health

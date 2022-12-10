@@ -1,6 +1,6 @@
 namespace Code.Ship.Health
 {
-    public class HPService
+    public class HPService : IHPService
     {
         public void TakeDamage(ref float damage, Ship ship)
         {

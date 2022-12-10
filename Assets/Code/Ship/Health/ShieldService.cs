@@ -2,7 +2,7 @@ using System.Linq;
 
 namespace Code.Ship.Health
 {
-    public class ShieldService
+    public class ShieldService : IShieldService
     {
         public void Tick(float tick, Ship ship)
         {

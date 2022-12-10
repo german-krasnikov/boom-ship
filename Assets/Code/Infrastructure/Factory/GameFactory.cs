@@ -5,17 +5,17 @@ namespace Code.Infrastructure.Factory
 {
   public class GameFactory : IGameFactory
   {
-    private readonly IAssets _assets;
+    private readonly IAssetProvider _assetProvider;
 
-    public GameFactory(IAssets assets)
+    public GameFactory(IAssetProvider assetProvider)
     {
-      _assets = assets;
+      _assetProvider = assetProvider;
     }
 
     public GameObject CreateBullet(GameObject at) => 
-      _assets.Instantiate(AssetPath.BulletPath, at: at.transform.position);
+      _assetProvider.Instantiate(AssetPath.BulletPath, at: at.transform.position);
 
     public void CreateHud() =>
-      _assets.Instantiate(AssetPath.HudPath);
+      _assetProvider.Instantiate(AssetPath.HudPath);
   }
 }

@@ -4,7 +4,7 @@ using Code.Ship.Health;
 
 namespace Code.Ship
 {
-    public class ShipService
+    public class ShipService : IShipService
     {
         private HealthService _healthService = new HealthService();
         private WeaponService _weaponService = new WeaponService();

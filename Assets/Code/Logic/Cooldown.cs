@@ -1,4 +1,4 @@
-namespace Code.Data
+namespace Code.Logic
 {
     public class Cooldown
     {

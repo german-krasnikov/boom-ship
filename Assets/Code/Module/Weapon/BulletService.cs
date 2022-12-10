@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using Code.Infrastructure;
 using Code.Ship.Health;
 using UnityEngine;
 
 namespace Code.Module.Weapon
 {
-    public class BulletService
+    public class BulletService : IBulletService
     {
         public List<Bullet> bullets = new List<Bullet>();
 

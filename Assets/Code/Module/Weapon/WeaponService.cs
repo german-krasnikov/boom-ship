@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Data;
 using Code.Infrastructure.AssetManagement;
 using Code.Logic;
 using Code.Ship.Health;
@@ -8,9 +7,9 @@ using UnityEngine;
 
 namespace Code.Module.Weapon
 {
-    public class WeaponService
+    public class WeaponService : IWeaponService
     {
-        private AssetProvider _assetProvider = new AssetProvider();
+        private AssetProviderProvider _assetProviderProvider = new AssetProviderProvider();
 
         public void Tick(float tick, Ship.Ship ship, List<Ship.Ship> enemies, BulletService bulletService)
         {
@@ -44,7 +43,7 @@ namespace Code.Module.Weapon
             bulletService.bullets.Add(bullet);
             weapon.Cooldown.Reset();
             Debug.Log("Shot " + enemy.Health.GetTotal());
-            var bulletUI = _assetProvider.Instantiate(AssetPath.BulletPath, weapon.UI.transform.position);
+            var bulletUI = _assetProviderProvider.Instantiate(AssetPath.BulletPath, weapon.UI.transform.position);
             bulletUI.GetComponent<BulletUI>().StartCoroutine(
                 MoveOverSeconds.Move(bulletUI, enemy.UI, bullet.Cooldown.Current));
             bullet.UI = bulletUI;
