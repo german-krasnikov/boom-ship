@@ -2,12 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Data;
 using Code.Ship.Health;
+using UnityEngine;
 
 namespace Code.Module.Weapon
 {
     public class WeaponService
     {
-        public void Tick(float tick, Ship.Ship ship, List<Ship.Ship> enemies, HealthService healthService)
+        public void Tick(float tick, Ship.Ship ship, List<Ship.Ship> enemies, BulletService bulletService)
         {
             foreach (var weapon in ship.Weapons())
             {
@@ -16,7 +17,7 @@ namespace Code.Module.Weapon
                 {
                     var enemy = FindEnemyForShot(enemies, weapon);
                     if (enemy != null)
-                        Shot(enemy, weapon, healthService);
+                        Shot(enemy, weapon, bulletService);
                 }
             }
         }
@@ -28,11 +29,17 @@ namespace Code.Module.Weapon
 
         private Ship.Ship FindEnemyForShot(List<Ship.Ship> enemies, Weapon weapon) => enemies.FirstOrDefault();
 
-        private void Shot(Ship.Ship enemy, Weapon weapon, HealthService healthService)
+        private void Shot(Ship.Ship enemy, Weapon weapon, BulletService bulletService)
         {
-            healthService.TakeDamage(weapon.Damage, enemy);
+            var bullet = new Bullet
+            {
+                Damage = weapon.Damage,
+                Target = enemy,
+            };
+            bullet.Cooldown.Set(weapon.BulletTime);
+            bulletService.bullets.Add(bullet);
             weapon.Cooldown.Reset();
-            //enemy.Shot();
+            Debug.Log("Shot " + enemy.Health.GetTotal());
         }
     }
 }

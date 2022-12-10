@@ -10,6 +10,12 @@ namespace Code.Data
             BaseCooldown = baseCooldown;
         }
 
+        public void Set(float value)
+        {
+            BaseCooldown = value;
+            Current = value;
+        }
+
         public void Reset()
         {
             Current = BaseCooldown;

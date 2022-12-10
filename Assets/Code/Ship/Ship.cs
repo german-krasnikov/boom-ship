@@ -20,6 +20,8 @@ namespace Code.Ship
                 Health.HP.AdditionalHpModules.Add(module as AdditionalHPModule);
         }
 
+       
+
         public IEnumerable<Weapon> Weapons() => Modules.OfType<Weapon>();
         public IEnumerable<SpeedupRestoreShieldModule> SpeedupRestoreShields() => Modules.OfType<SpeedupRestoreShieldModule>();
         public IEnumerable<SpeedupReloadWeaponModule> SpeedupReloadWeapons() => Modules.OfType<SpeedupReloadWeaponModule>();
