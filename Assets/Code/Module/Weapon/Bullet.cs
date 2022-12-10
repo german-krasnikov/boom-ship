@@ -9,6 +9,5 @@ namespace Code.Module.Weapon
         public Cooldown Cooldown = new Cooldown(1);
 
         public bool Done() => Cooldown.IsExpired();
-        
     }
 }

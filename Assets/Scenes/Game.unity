@@ -523,10 +523,10 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.381
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -772,7 +772,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9144030251778499809, guid: b3c0a61dfe701344d819eb701e83f4b7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b3c0a61dfe701344d819eb701e83f4b7, type: 3}
 --- !u!1001 &1287413438
 PrefabInstance:
@@ -839,7 +840,7 @@ PrefabInstance:
     - target: {fileID: 3368916564331560363, guid: b3c0a61dfe701344d819eb701e83f4b7,
         type: 3}
       propertyPath: m_Name
-      value: Spaceship (1)
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 9144030251778499809, guid: b3c0a61dfe701344d819eb701e83f4b7,
         type: 3}
@@ -906,7 +907,7 @@ MeshCollider:
   m_GameObject: {fileID: 1630978647}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
@@ -931,7 +932,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: dc2141e1d0ef64a35a1ae9f0e0eff173, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1030,6 +1031,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47e1cf53b5094707aa11c755f8bba61c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Ship: {fileID: 1842956802}
+  Enemy: {fileID: 1287413439}
 --- !u!4 &2051939329
 Transform:
   m_ObjectHideFlags: 0

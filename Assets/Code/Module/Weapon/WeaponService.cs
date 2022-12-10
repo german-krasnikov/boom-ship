@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.Data;
+using Code.Infrastructure.AssetManagement;
 using Code.Ship.Health;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ namespace Code.Module.Weapon
 {
     public class WeaponService
     {
+        private AssetProvider _assetProvider = new AssetProvider();
+
         public void Tick(float tick, Ship.Ship ship, List<Ship.Ship> enemies, BulletService bulletService)
         {
             foreach (var weapon in ship.Weapons())
@@ -17,7 +20,7 @@ namespace Code.Module.Weapon
                 {
                     var enemy = FindEnemyForShot(enemies, weapon);
                     if (enemy != null)
-                        Shot(enemy, weapon, bulletService);
+                        Shot(enemy, ship, weapon, bulletService);
                 }
             }
         }
@@ -29,7 +32,7 @@ namespace Code.Module.Weapon
 
         private Ship.Ship FindEnemyForShot(List<Ship.Ship> enemies, Weapon weapon) => enemies.FirstOrDefault();
 
-        private void Shot(Ship.Ship enemy, Weapon weapon, BulletService bulletService)
+        private void Shot(Ship.Ship enemy, Ship.Ship ship, Weapon weapon, BulletService bulletService)
         {
             var bullet = new Bullet
             {
@@ -40,6 +43,9 @@ namespace Code.Module.Weapon
             bulletService.bullets.Add(bullet);
             weapon.Cooldown.Reset();
             Debug.Log("Shot " + enemy.Health.GetTotal());
+            var bulletUI = _assetProvider.Instantiate(AssetPath.BulletPath, ship.UI.transform.position);
+            bulletUI.GetComponent<BulletUI>().StartCoroutine(
+                bulletUI.GetComponent<BulletUI>().MoveOverSeconds(bulletUI, enemy.UI, bullet.Cooldown.Current));
         }
     }
 }

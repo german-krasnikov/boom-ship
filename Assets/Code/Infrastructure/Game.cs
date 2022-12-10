@@ -13,9 +13,10 @@ namespace Code.Infrastructure
         private List<Ship.Ship> _enemies = new List<Ship.Ship>();
         private ShipService _shipService = new ShipService();
 
-        public void Init()
+        public void Init(GameObject shipUI, GameObject enemyUI)
         {
             _ship = new Ship.Ship();
+            _ship.UI = shipUI;
             _ship.Health.Shield.Value = 90;
             //_ship.Health.Shield.IncCooldown.BaseCooldown = 2;
             var weapon = new Weapon();
@@ -25,7 +26,9 @@ namespace Code.Infrastructure
             _ship.AddModule(new AdditionalShieldModule { Max = 50, Value = 45 });
             _ship.AddModule(new AdditionalHPModule());
 
-            _enemies.Add(new Ship.Ship());
+            var enemy = new Ship.Ship();
+            enemy.UI = enemyUI;
+            _enemies.Add(enemy);
 
             //var damageModule = new WeaponService();
             //damageModule.Tick(1, _ship, new() { _ship });

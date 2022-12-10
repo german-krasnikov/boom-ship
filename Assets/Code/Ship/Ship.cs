@@ -1,12 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.Infrastructure;
 using Code.Module.Health;
 using Code.Module.Weapon;
+using UnityEngine;
 
 namespace Code.Ship
 {
     public class Ship
     {
+        public GameObject UI;
+        
         public Health.Health Health = new Health.Health();
         private List<Module.BaseModule> Modules = new List<Module.BaseModule>();
 
@@ -19,8 +23,6 @@ namespace Code.Ship
             else if (module.GetType() == typeof(AdditionalHPModule))
                 Health.HP.AdditionalHpModules.Add(module as AdditionalHPModule);
         }
-
-       
 
         public IEnumerable<Weapon> Weapons() => Modules.OfType<Weapon>();
         public IEnumerable<SpeedupRestoreShieldModule> SpeedupRestoreShields() => Modules.OfType<SpeedupRestoreShieldModule>();
