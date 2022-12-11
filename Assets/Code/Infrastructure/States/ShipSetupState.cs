@@ -1,14 +1,14 @@
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
 using Code.Module.Health;
-using Code.Screens.SetupShip;
+using Code.Screens.ShipSetup;
 using Code.Ship;
 using Code.World;
 using UnityEngine;
 
 namespace Code.Infrastructure.States
 {
-    public class SetupShipState : IState
+    public class ShipSetupState : IState
     {
         private readonly GameStateMachine _stateMachine;
         private readonly AllServices _services;
@@ -16,7 +16,7 @@ namespace Code.Infrastructure.States
         private IGameFactory _factory;
         private World.World _world;
 
-        public SetupShipState(GameStateMachine stateMachine, AllServices services)
+        public ShipSetupState(GameStateMachine stateMachine, AllServices services)
         {
             _stateMachine = stateMachine;
             _services = services;
@@ -25,13 +25,13 @@ namespace Code.Infrastructure.States
         public void Enter()
         {
             RegisterDependencies();
-            SetupShipScreenUI.StartGame += StartGame;
+            ShipSetupScreenUI.StartGame += StartGame;
             Init();
         }
 
         public void Exit()
         {
-            SetupShipScreenUI.StartGame -= StartGame;
+            ShipSetupScreenUI.StartGame -= StartGame;
         }
 
         public void Tick(float deltaTime)

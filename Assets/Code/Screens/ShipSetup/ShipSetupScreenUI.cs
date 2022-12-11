@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace Code.Screens.SetupShip
+namespace Code.Screens.ShipSetup
 {
-    public class SetupShipScreenUI : MonoBehaviour
+    public class ShipSetupScreenUI : MonoBehaviour
     {
         public static event Action StartGame;
 

@@ -27,9 +27,6 @@ namespace Code.Infrastructure.States
         {
             _shipService.Tick(deltaTime, _world.Ship, _world.Enemies);
             _shipService.Tick(deltaTime, _world.Enemies.First(), new() { _world.Ship });
-            //var enemy = _enemies.First();
-            //Debug.Log(enemy.Health.HP.GetTotalHP() + " " + enemy.Health.Shield.GetTotalShield());
-            //Debug.Log(_ship.Health.HP.GetTotalHP() + " " + _ship.Health.Shield.Value + " " + _ship.Health.Shield.AdditionalShields.First().Value);
         }
 
         public void Exit()

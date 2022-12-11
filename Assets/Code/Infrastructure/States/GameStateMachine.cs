@@ -14,7 +14,7 @@ namespace Code.Infrastructure.States
             _states = new Dictionary<Type, IState>()
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, services),
-                [typeof(SetupShipState)] = new SetupShipState(this, services),
+                [typeof(ShipSetupState)] = new ShipSetupState(this, services),
                 [typeof(GameLoopState)] = new GameLoopState(this, services)
             };
         }

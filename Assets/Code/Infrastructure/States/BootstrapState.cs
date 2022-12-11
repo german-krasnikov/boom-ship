@@ -23,7 +23,7 @@ namespace Code.Infrastructure.States
         public void Enter()
         {
             RegisterServices();
-            _stateMachine.Enter<SetupShipState>();
+            _stateMachine.Enter<ShipSetupState>();
         }
 
         public void Tick(float deltaTime)

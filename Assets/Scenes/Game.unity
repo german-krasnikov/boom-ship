@@ -751,7 +751,7 @@ PrefabInstance:
     - target: {fileID: 2592547876554888184, guid: bce03dca2c69344ee8e24751af57239f,
         type: 3}
       propertyPath: m_Name
-      value: SetupShipScreen
+      value: ShipSetupScreen
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bce03dca2c69344ee8e24751af57239f, type: 3}
