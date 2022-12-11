@@ -24,8 +24,9 @@ namespace Code.Logic
             Vector3 startingPos = source.transform.position;
             while (elapsedTime < seconds)
             {
-                source.transform.position = Vector3.Lerp(startingPos, target.transform.position, (elapsedTime / seconds));
+                source.transform.position = Vector3.Lerp(startingPos, target.transform.position, (elapsedTime / seconds*2));
                 elapsedTime += Time.deltaTime;
+                //Debug.Log($"{elapsedTime} {seconds}");
                 yield return new WaitForEndOfFrame();
             }
             source.transform.position = target.transform.position;

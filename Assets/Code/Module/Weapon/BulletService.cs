@@ -37,6 +37,7 @@ namespace Code.Module.Weapon
 
         private void TickBullet(float tick, Bullet bullet)
         {
+            Debug.Log($"{bullet.Cooldown.Current} {tick}");
             bullet.Cooldown.Tick(tick);
         }
 

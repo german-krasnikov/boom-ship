@@ -7,7 +7,7 @@ namespace Code.Logic
 
         public Cooldown(float baseCooldown)
         {
-            BaseCooldown = baseCooldown;
+            Set(baseCooldown);
         }
 
         public void Set(float value)

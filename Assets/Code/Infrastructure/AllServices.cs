@@ -8,7 +8,7 @@ namespace Code.Infrastructure
         public void RegisterSingle<TService>(TService implementation) where TService : IService => 
             Implementation<TService>.ServiceInstance = implementation;
 
-        public TService Signle<TService>() where TService : IService => 
+        public TService Single<TService>() where TService : IService => 
             Implementation<TService>.ServiceInstance;
 
         private static class Implementation<TService> where TService : IService

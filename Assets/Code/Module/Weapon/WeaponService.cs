@@ -25,9 +25,9 @@ namespace Code.Module.Weapon
                 TickWeapon(tick, ship, weapon);
                 if (weapon.CanShot())
                 {
-                    var enemy = FindEnemyForShot(enemies, weapon);
+                    var enemy = FindEnemyForShot(enemies);
                     if (enemy != null)
-                        Shot(enemy, ship, weapon);
+                        Shot(enemy, weapon);
                 }
             }
         }
@@ -37,9 +37,9 @@ namespace Code.Module.Weapon
             weapon.Cooldown.TickWithSpeedUp(tick, ship.SpeedupReloadWeapons().Sum(it => it.SpeedupPercent));
         }
 
-        private Ship.Ship FindEnemyForShot(List<Ship.Ship> enemies, Weapon weapon) => enemies.FirstOrDefault();
+        private Ship.Ship FindEnemyForShot(List<Ship.Ship> enemies) => enemies.FirstOrDefault();
 
-        private void Shot(Ship.Ship enemy, Ship.Ship ship, Weapon weapon)
+        private void Shot(Ship.Ship enemy, Weapon weapon)
         {
             var bullet = new Bullet
             {
@@ -49,7 +49,7 @@ namespace Code.Module.Weapon
             bullet.Cooldown.Set(weapon.BulletTime);
             _bulletService.AddBullet(bullet);
             weapon.Cooldown.Reset();
-            Debug.Log($"Shot to {enemy.UI.name} " + enemy.Health.GetTotal());
+            Debug.Log($"Shot to {enemy.UI.name} {enemy.Health.GetTotal()} {bullet.Cooldown.Current}");
             var bulletUI = _assetProvider.Instantiate(AssetPath.BulletPath, weapon.UI.BulletSpawnPoint.transform.position);
             bulletUI.GetComponent<BulletUI>().StartCoroutine(
                 MoveOverSeconds.Move(bulletUI, enemy.UI, bullet.Cooldown.Current));
