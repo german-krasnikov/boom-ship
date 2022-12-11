@@ -15,7 +15,8 @@ namespace Code.Infrastructure.States
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, services),
                 [typeof(ShipSetupState)] = new ShipSetupState(this, services),
-                [typeof(GameLoopState)] = new GameLoopState(this, services)
+                [typeof(GameLoopState)] = new GameLoopState(this, services),
+                [typeof(GameResultState)] = new GameResultState(this, services),
             };
         }
 

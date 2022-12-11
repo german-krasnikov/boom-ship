@@ -15,6 +15,7 @@ namespace Code.Infrastructure.States
 
         private IGameFactory _factory;
         private World.World _world;
+        private GameObject _shipSetupScreen;
 
         public ShipSetupState(GameStateMachine stateMachine, AllServices services)
         {
@@ -25,6 +26,7 @@ namespace Code.Infrastructure.States
         public void Enter()
         {
             RegisterDependencies();
+            _shipSetupScreen = _factory.CreateShipSetupScreen();
             ShipSetupScreenUI.StartGame += StartGame;
             Init();
         }
@@ -32,6 +34,7 @@ namespace Code.Infrastructure.States
         public void Exit()
         {
             ShipSetupScreenUI.StartGame -= StartGame;
+            Object.Destroy(_shipSetupScreen);
         }
 
         public void Tick(float deltaTime)

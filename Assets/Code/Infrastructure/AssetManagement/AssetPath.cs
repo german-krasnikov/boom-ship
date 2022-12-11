@@ -6,5 +6,7 @@
         public const string HudPath = "Hud";
         public const string ShipPath = "Spaceship";
         public const string WeaponsPath = "Weapon/";
+        public const string ShipSetupScreenPath = "UI/ShipSetupScreen";
+        public const string GameResultScreenPath = "UI/GameResultScreen";
     }
 }

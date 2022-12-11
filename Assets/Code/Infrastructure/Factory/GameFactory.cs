@@ -19,6 +19,10 @@ namespace Code.Infrastructure.Factory
         public void CreateHud() =>
             _assetProvider.Instantiate(AssetPath.HudPath);
 
+        public GameObject CreateShipSetupScreen() => _assetProvider.Instantiate(AssetPath.ShipSetupScreenPath);
+
+        public GameObject CreateGameResultScreen() => _assetProvider.Instantiate(AssetPath.GameResultScreenPath);
+
         public Weapon.Weapon CreateWeapon(GameObject shipUI, GameObject enemyUI, string weaponId, int indexPosition, float cooldown)
         {
             GameObject weaponUI = _assetProvider.Instantiate(AssetPath.WeaponsPath + weaponId);
@@ -30,6 +34,7 @@ namespace Code.Infrastructure.Factory
             weapon.UI = weaponUI.GetComponent<WeaponUI>();
             weapon.BulletTime = 4f;
             weapon.Cooldown.Set(cooldown);
+            weapon.Damage = 20;
             return weapon;
         }
     }

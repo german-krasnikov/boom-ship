@@ -27,10 +27,24 @@ namespace Code.Infrastructure.States
         {
             _shipService.Tick(deltaTime, _world.Ship, _world.Enemies);
             _shipService.Tick(deltaTime, _world.Enemies.First(), new() { _world.Ship });
+            CheckGameEnd();
         }
 
         public void Exit()
         {
+        }
+
+        private void CheckGameEnd()
+        {
+            if (IsGameEnd())
+                _stateMachine.Enter<GameResultState>();
+        }
+
+        private bool IsGameEnd()
+        {
+            if (!_world.Ship.Health.IsAlive())
+                return true;
+            return _world.Enemies.Count(it => it.Health.IsAlive()) == 0;
         }
 
         private void RegisterDependencies()
