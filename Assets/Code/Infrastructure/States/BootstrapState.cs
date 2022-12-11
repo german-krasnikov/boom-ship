@@ -5,7 +5,6 @@ using Code.Ship;
 using Code.Ship.Health;
 using Code.Weapon;
 using Code.World;
-using UnityEngine;
 
 namespace Code.Infrastructure.States
 {
@@ -24,7 +23,7 @@ namespace Code.Infrastructure.States
         public void Enter()
         {
             RegisterServices();
-            _stateMachine.Enter<GameLoopState>();
+            _stateMachine.Enter<SetupShipState>();
         }
 
         public void Tick(float deltaTime)
@@ -52,7 +51,7 @@ namespace Code.Infrastructure.States
                 _services.Single<IShieldService>(),
                 _services.Single<IHPService>()));
             _services.RegisterSingle<IBulletService>(new BulletService(
-                _services.Single<IHealthService>(), 
+                _services.Single<IHealthService>(),
                 _services.Single<IWorldService>()));
             _services.RegisterSingle<IWeaponService>(new WeaponService(
                 _services.Single<IAssetProvider>(),
