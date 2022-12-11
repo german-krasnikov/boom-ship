@@ -65,7 +65,7 @@ namespace Code.Infrastructure.States
             ship.Health.Shield.Value = 90;
             
             ship.AddModule(_factory.CreateWeapon(shipUI, enemyUI, "RocketLauncher5", 0, 4));
-            ship.AddModule(_factory.CreateWeapon(shipUI, enemyUI, "Gun4", 1, 0.5f));
+            ship.AddModule(_factory.CreateWeapon(shipUI, enemyUI, "Shocker5", 1, 0.5f));
             ship.AddModule(new SpeedupRestoreShieldModule());
             ship.AddModule(new AdditionalShieldModule { Max = 50, Value = 45 });
             ship.AddModule(new AdditionalHPModule());
