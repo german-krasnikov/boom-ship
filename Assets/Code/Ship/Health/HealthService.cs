@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace Code.Ship.Health
 {
     public class HealthService : IHealthService

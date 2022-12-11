@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Code.Infrastructure;
 using Code.Module;
 using Code.Module.Health;
 using UnityEngine;
@@ -12,9 +11,9 @@ namespace Code.Ship
         public GameObject UI;
         
         public Health.Health Health = new Health.Health();
-        private List<Module.BaseModule> Modules = new List<Module.BaseModule>();
+        private List<BaseModule> Modules = new List<BaseModule>();
 
-        public void AddModule(Module.BaseModule module)
+        public void AddModule(BaseModule module)
         {
             Modules.Add(module);
 

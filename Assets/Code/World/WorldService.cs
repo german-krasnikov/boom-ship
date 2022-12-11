@@ -1,5 +1,3 @@
-using Code.Infrastructure;
-
 namespace Code.World
 {
     public class WorldService : IWorldService

@@ -2,7 +2,6 @@ using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
 using Code.Module.Health;
 using Code.Screens.ShipSetup;
-using Code.Ship;
 using Code.World;
 using UnityEngine;
 
@@ -64,7 +63,7 @@ namespace Code.Infrastructure.States
             var ship = _world.Ship;
             ship.UI = shipUI;
             ship.Health.Shield.Value = 90;
-            //_ship.Health.Shield.IncCooldown.BaseCooldown = 2;
+            
             ship.AddModule(_factory.CreateWeapon(shipUI, enemyUI, "RocketLauncher5", 0, 4));
             ship.AddModule(_factory.CreateWeapon(shipUI, enemyUI, "Gun4", 1, 0.5f));
             ship.AddModule(new SpeedupRestoreShieldModule());
@@ -76,10 +75,6 @@ namespace Code.Infrastructure.States
             _world.Enemies.Add(enemy);
             enemy.AddModule(_factory.CreateWeapon(enemyUI, shipUI, "RocketLauncher5", 0, 4));
             enemy.AddModule(_factory.CreateWeapon(enemyUI, shipUI, "Gun4", 1, 0.5f));
-
-            //var damageModule = new WeaponService();
-            //damageModule.Tick(1, _ship, new() { _ship });
-            //Debug.Log("Damage");
         }
     }
 }
