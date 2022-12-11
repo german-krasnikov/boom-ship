@@ -10,10 +10,6 @@ namespace Code.Infrastructure
 {
     public class GameBootstrapper : MonoBehaviour
     {
-        public GameObject Ship;
-        public GameObject Enemy;
-        public GameObject Weapon;
-
         private Game _game;
         private AllServices _services;
 
@@ -22,7 +18,7 @@ namespace Code.Infrastructure
             _services = AllServices.Container;
             InitServices();
             _game = new Game(_services.Signle<IShipService>());
-            _game.Init(Ship, Enemy, Weapon);
+            _game.Init();
             DontDestroyOnLoad(this);
         }
 

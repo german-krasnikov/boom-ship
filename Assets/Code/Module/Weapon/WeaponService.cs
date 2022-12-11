@@ -49,8 +49,8 @@ namespace Code.Module.Weapon
             bullet.Cooldown.Set(weapon.BulletTime);
             _bulletService.AddBullet(bullet);
             weapon.Cooldown.Reset();
-            Debug.Log("Shot " + enemy.Health.GetTotal());
-            var bulletUI = _assetProvider.Instantiate(AssetPath.BulletPath, weapon.UI.transform.position);
+            Debug.Log($"Shot to {enemy.UI.name} " + enemy.Health.GetTotal());
+            var bulletUI = _assetProvider.Instantiate(AssetPath.BulletPath, weapon.UI.BulletSpawnPoint.transform.position);
             bulletUI.GetComponent<BulletUI>().StartCoroutine(
                 MoveOverSeconds.Move(bulletUI, enemy.UI, bullet.Cooldown.Current));
             bullet.UI = bulletUI;

@@ -1,17 +1,18 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Code.Logic
 {
     public class LookAt : MonoBehaviour
     {
-        [SerializeField]
-        private Transform _target;
+        [HideInInspector]
+        public Transform Target;
         [SerializeField]
         private Vector3 _offSet;
 
         private void LateUpdate()
         {
-            transform.rotation = Quaternion.Euler(_offSet) * Quaternion.LookRotation(_target.transform.position - transform.position);
+            transform.rotation = Quaternion.Euler(_offSet) * Quaternion.LookRotation(Target.transform.position - transform.position);
         }
     }
 }

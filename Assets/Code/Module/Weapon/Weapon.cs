@@ -5,7 +5,7 @@ namespace Code.Module.Weapon
 {
     public class Weapon : BaseModule
     {
-        public GameObject UI;
+        public WeaponUI UI;
         
         public float Damage = 30;
         public Cooldown Cooldown = new Cooldown(1);
