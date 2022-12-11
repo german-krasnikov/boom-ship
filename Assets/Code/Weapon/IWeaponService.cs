@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Code.Infrastructure;
 
-namespace Code.Module.Weapon
+namespace Code.Weapon
 {
     public interface IWeaponService : IService
     {

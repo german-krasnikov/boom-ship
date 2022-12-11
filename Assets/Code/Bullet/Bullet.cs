@@ -1,7 +1,7 @@
 using Code.Logic;
 using UnityEngine;
 
-namespace Code.Module.Weapon
+namespace Code.Bullet
 {
     public class Bullet
     {

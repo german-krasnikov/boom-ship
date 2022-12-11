@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Code.Infrastructure;
+using Code.Module;
 using Code.Module.Health;
-using Code.Module.Weapon;
 using UnityEngine;
 
 namespace Code.Ship
@@ -24,7 +24,7 @@ namespace Code.Ship
                 Health.HP.AdditionalHpModules.Add(module as AdditionalHPModule);
         }
 
-        public IEnumerable<Weapon> Weapons() => Modules.OfType<Weapon>();
+        public IEnumerable<Weapon.Weapon> Weapons() => Modules.OfType<Weapon.Weapon>();
         public IEnumerable<SpeedupRestoreShieldModule> SpeedupRestoreShields() => Modules.OfType<SpeedupRestoreShieldModule>();
         public IEnumerable<SpeedupReloadWeaponModule> SpeedupReloadWeapons() => Modules.OfType<SpeedupReloadWeaponModule>();
     }

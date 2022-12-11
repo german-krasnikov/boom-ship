@@ -1,8 +1,10 @@
-﻿using Code.Infrastructure.AssetManagement;
+﻿using Code.Bullet;
+using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
-using Code.Module.Weapon;
 using Code.Ship;
 using Code.Ship.Health;
+using Code.Weapon;
+using Code.World;
 using UnityEngine;
 
 namespace Code.Infrastructure.States
@@ -43,12 +45,15 @@ namespace Code.Infrastructure.States
         private void RegisterGameplayServices()
         {
             _services.RegisterSingle<GameStateMachine>(_stateMachine);
+            _services.RegisterSingle<IWorldService>(new WorldService());
             _services.RegisterSingle<IHPService>(new HPService());
             _services.RegisterSingle<IShieldService>(new ShieldService());
             _services.RegisterSingle<IHealthService>(new HealthService(
                 _services.Single<IShieldService>(),
                 _services.Single<IHPService>()));
-            _services.RegisterSingle<IBulletService>(new BulletService(_services.Single<IHealthService>()));
+            _services.RegisterSingle<IBulletService>(new BulletService(
+                _services.Single<IHealthService>(), 
+                _services.Single<IWorldService>()));
             _services.RegisterSingle<IWeaponService>(new WeaponService(
                 _services.Single<IAssetProvider>(),
                 _services.Single<IBulletService>()));

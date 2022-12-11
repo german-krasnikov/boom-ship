@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
+using Code.Bullet;
 using Code.Infrastructure.AssetManagement;
 using Code.Logic;
-using Code.Ship.Health;
 using UnityEngine;
 
-namespace Code.Module.Weapon
+namespace Code.Weapon
 {
     public class WeaponService : IWeaponService
     {
@@ -41,7 +41,7 @@ namespace Code.Module.Weapon
 
         private void Shot(Ship.Ship enemy, Weapon weapon)
         {
-            var bullet = new Bullet
+            var bullet = new Bullet.Bullet
             {
                 Damage = weapon.Damage,
                 Target = enemy,

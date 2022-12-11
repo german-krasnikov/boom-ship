@@ -1,7 +1,7 @@
 using Code.Logic;
-using UnityEngine;
+using Code.Module;
 
-namespace Code.Module.Weapon
+namespace Code.Weapon
 {
     public class Weapon : BaseModule
     {

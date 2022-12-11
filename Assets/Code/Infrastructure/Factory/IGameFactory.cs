@@ -6,5 +6,6 @@ namespace Code.Infrastructure.Factory
     {
         GameObject CreateBullet(GameObject at);
         void CreateHud();
+        public Weapon.Weapon CreateWeapon(GameObject shipUI, GameObject enemyUI, string weaponId, int indexPosition, float cooldown);
     }
 }

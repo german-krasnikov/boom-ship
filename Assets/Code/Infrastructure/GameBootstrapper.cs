@@ -1,10 +1,4 @@
-using System;
-using Code.Infrastructure.AssetManagement;
-using Code.Infrastructure.Factory;
 using Code.Infrastructure.States;
-using Code.Module.Weapon;
-using Code.Ship;
-using Code.Ship.Health;
 using UnityEngine;
 
 namespace Code.Infrastructure

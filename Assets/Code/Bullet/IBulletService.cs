@@ -1,7 +1,6 @@
 using Code.Infrastructure;
-using Code.Ship.Health;
 
-namespace Code.Module.Weapon
+namespace Code.Bullet
 {
     public interface IBulletService : IService
     {

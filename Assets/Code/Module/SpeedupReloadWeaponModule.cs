@@ -1,4 +1,4 @@
-namespace Code.Module.Weapon
+namespace Code.Module
 {
     public class SpeedupReloadWeaponModule : BaseModule
     {

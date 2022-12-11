@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine;
 
-namespace Code.Module.Weapon
+namespace Code.Bullet
 {
     public class BulletUI : MonoBehaviour
     {
