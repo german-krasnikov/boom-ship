@@ -7,5 +7,10 @@ namespace Code.Weapon
     {
         public GameObject BulletSpawnPoint;
         public LookAt LookAt;
+
+        public void SetLookAtTarget(GameObject target)
+        {
+            LookAt.Target = target.transform;
+        }
     }
 }

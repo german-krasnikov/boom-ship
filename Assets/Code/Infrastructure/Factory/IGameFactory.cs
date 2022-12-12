@@ -10,7 +10,7 @@ namespace Code.Infrastructure.Factory
         void CreateHud();
         ShipSetupScreenUI CreateShipSetupScreen();
         GameObject CreateGameResultScreen();
-        public Weapon.Weapon CreateWeapon(GameObject shipUI, GameObject enemyUI, string weaponId, int indexPosition, float cooldown);
+        Weapon.Weapon CreateWeapon(Ship.Ship ship, WeaponStaticData weaponData, int indexPosition);
 
         Ship.Ship CreateShip(ShipStaticData getSelectedShip, Vector3 at);
     }

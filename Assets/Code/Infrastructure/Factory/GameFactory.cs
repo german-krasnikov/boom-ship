@@ -24,27 +24,28 @@ namespace Code.Infrastructure.Factory
         public ShipSetupScreenUI CreateShipSetupScreen() =>
             _assetProvider.Instantiate(AssetPath.ShipSetupScreenPath).GetComponent<ShipSetupScreenUI>();
 
-        public GameObject CreateGameResultScreen() => _assetProvider.Instantiate(AssetPath.GameResultScreenPath);
-
-        public Weapon.Weapon CreateWeapon(GameObject shipUI, GameObject enemyUI, string weaponId, int indexPosition, float cooldown)
+        public Weapon.Weapon CreateWeapon(Ship.Ship ship, WeaponStaticData weaponData, int indexPosition)
         {
-            GameObject weaponUI = _assetProvider.Instantiate(AssetPath.WeaponsPath + weaponId);
-            weaponUI.transform.parent = shipUI.transform;
-            weaponUI.transform.position = shipUI.GetComponent<ShipUI>().GunPositions[indexPosition].position;
-            weaponUI.GetComponent<WeaponUI>().LookAt.Target = enemyUI.transform;
-
             var weapon = new Weapon.Weapon();
-            weapon.UI = weaponUI.GetComponent<WeaponUI>();
-            weapon.BulletTime = 4f;
-            weapon.Cooldown.Set(cooldown);
-            weapon.Damage = 20;
+            weapon.BulletTime = weaponData.BulletTime;
+            weapon.Cooldown.Set(weaponData.Cooldown);
+            weapon.Damage = weaponData.Damage;
+            ship.AddModule(weapon);
+            
+            WeaponUI weaponUI = _assetProvider.Instantiate(weaponData.Prefab).GetComponent<WeaponUI>();
+            weaponUI.transform.parent = ship.UI.transform;
+            weaponUI.transform.position = ship.UI.GunPositions[indexPosition].position;
+
+            weapon.UI = weaponUI;
             return weapon;
         }
+
+        public GameObject CreateGameResultScreen() => _assetProvider.Instantiate(AssetPath.GameResultScreenPath);
 
         public Ship.Ship CreateShip(ShipStaticData shipData, Vector3 at)
         {
             var ship = new Ship.Ship();
-            ship.UI = _assetProvider.Instantiate(shipData.Prefab, at);
+            ship.UI = _assetProvider.Instantiate(shipData.Prefab, at).GetComponent<ShipUI>();
             ship.Health.HP.SetAndReset(shipData.HP);
             ship.Health.Shield.SetAndReset(shipData.Shield, shipData.ShieldIncValue, shipData.ShieldIncCooldown);
             return ship;

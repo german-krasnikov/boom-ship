@@ -52,7 +52,7 @@ namespace Code.Weapon
             Debug.Log($"Shot to {enemy.UI.name} {enemy.Health.GetTotal()} {bullet.Cooldown.Current}");
             var bulletUI = _assetProvider.Instantiate(AssetPath.BulletPath, weapon.UI.BulletSpawnPoint.transform.position);
             bulletUI.GetComponent<BulletUI>().StartCoroutine(
-                MoveOverSeconds.Move(bulletUI, enemy.UI, bullet.Cooldown.Current));
+                MoveOverSeconds.Move(bulletUI, enemy.UI.gameObject, bullet.Cooldown.Current));
             bullet.UI = bulletUI;
         }
     }

@@ -8,10 +8,14 @@ namespace Code.Ship
 {
     public class Ship
     {
-        public GameObject UI;
-        
+        public ShipUI UI;
+
         public Health.Health Health = new Health.Health();
         private List<BaseModule> Modules = new List<BaseModule>();
+
+        public IEnumerable<Weapon.Weapon> Weapons() => Modules.OfType<Weapon.Weapon>();
+        public IEnumerable<SpeedupRestoreShieldModule> SpeedupRestoreShields() => Modules.OfType<SpeedupRestoreShieldModule>();
+        public IEnumerable<SpeedupReloadWeaponModule> SpeedupReloadWeapons() => Modules.OfType<SpeedupReloadWeaponModule>();
 
         public void AddModule(BaseModule module)
         {
@@ -23,8 +27,10 @@ namespace Code.Ship
                 Health.HP.AdditionalHpModules.Add(module as AdditionalHPModule);
         }
 
-        public IEnumerable<Weapon.Weapon> Weapons() => Modules.OfType<Weapon.Weapon>();
-        public IEnumerable<SpeedupRestoreShieldModule> SpeedupRestoreShields() => Modules.OfType<SpeedupRestoreShieldModule>();
-        public IEnumerable<SpeedupReloadWeaponModule> SpeedupReloadWeapons() => Modules.OfType<SpeedupReloadWeaponModule>();
+        public void SetTargetForWeapons(GameObject target)
+        {
+            foreach (var weapon in Weapons())
+                weapon.UI.SetLookAtTarget(target);
+        }
     }
 }
