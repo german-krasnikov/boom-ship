@@ -12,7 +12,8 @@ namespace Code.Screens.ShipSetup.Carousel
 
         protected override void OnChanged(ShipStaticData value)
         {
-            _text.text = value.Name;
+            _text.text =
+                $"{value.Name}\nHP: {value.HP}, Shield: {value.Shield}, Shield inc cooldown: {value.ShieldIncCooldown}, Shield inc value: {value.ShieldIncValue}";
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Code.Logic.Carousel;
 using Code.StaticData;
 using TMPro;
@@ -12,7 +13,25 @@ namespace Code.Screens.ShipSetup.Carousel
 
         protected override void OnChanged(ModuleStaticData value)
         {
-            _text.text = value.Name;
+            var description = "";
+            switch (value.Type)
+            {
+                case ModuleType.SpeedupReloadWeapon:
+                    description = $"-{value.Value}%";
+                    break;
+                case ModuleType.AdditionalHP:
+                    description = $"+{value.Value} HP";
+                    break;
+                case ModuleType.AdditionalShield:
+                    description = $"+{value.Value} Shield";
+                    break;
+                case ModuleType.SpeedupRestoreShield:
+                    description = $"+{value.Value}%";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            _text.text = $"{value.Name} -- {value.Type} {description}";
         }
     }
 }

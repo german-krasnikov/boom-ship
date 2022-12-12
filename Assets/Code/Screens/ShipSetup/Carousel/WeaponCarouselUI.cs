@@ -12,7 +12,7 @@ namespace Code.Screens.ShipSetup.Carousel
 
         protected override void OnChanged(WeaponStaticData value)
         {
-            _text.text = value.Name;
+            _text.text = $"{value.Name} -- Damage: {value.Damage}, Cooldown: {value.Cooldown}, Bullet time: {value.BulletTime}";
         }
     }
 }
