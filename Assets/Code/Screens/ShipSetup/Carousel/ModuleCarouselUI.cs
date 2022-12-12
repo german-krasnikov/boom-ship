@@ -13,6 +13,7 @@ namespace Code.Screens.ShipSetup.Carousel
 
         protected override void OnChanged(ModuleStaticData value)
         {
+            
             var description = "";
             switch (value.Type)
             {
