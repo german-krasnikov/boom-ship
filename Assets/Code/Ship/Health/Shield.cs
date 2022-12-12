@@ -14,6 +14,13 @@ namespace Code.Ship.Health
         public List<AdditionalShieldModule> AdditionalShields = new List<AdditionalShieldModule>();
         public bool IsEmpty() => GetTotalShield() <= 0;
 
+        public void SetAndReset(float max, float incValue, float incCooldown)
+        {
+            Max = max;
+            IncValue = incValue;
+            IncCooldown.Set(incCooldown);
+        }
+
         public void Reset()
         {
             Value = Max;
@@ -56,6 +63,7 @@ namespace Code.Ship.Health
         }
 
         private float GetMaxAdditionalShields() => AdditionalShields.Sum(it => it.Max);
+
         private float GetAdditionalShields() => AdditionalShields.Sum(it => it.Value);
 
         private void IncAdditionalShields(float inc)

@@ -1,4 +1,6 @@
 ﻿using Code.Infrastructure.AssetManagement;
+using Code.Screens.ShipSetup;
+using Code.StaticData;
 using Code.Weapon;
 using UnityEngine;
 
@@ -19,7 +21,8 @@ namespace Code.Infrastructure.Factory
         public void CreateHud() =>
             _assetProvider.Instantiate(AssetPath.HudPath);
 
-        public GameObject CreateShipSetupScreen() => _assetProvider.Instantiate(AssetPath.ShipSetupScreenPath);
+        public ShipSetupScreenUI CreateShipSetupScreen() =>
+            _assetProvider.Instantiate(AssetPath.ShipSetupScreenPath).GetComponent<ShipSetupScreenUI>();
 
         public GameObject CreateGameResultScreen() => _assetProvider.Instantiate(AssetPath.GameResultScreenPath);
 
@@ -36,6 +39,15 @@ namespace Code.Infrastructure.Factory
             weapon.Cooldown.Set(cooldown);
             weapon.Damage = 20;
             return weapon;
+        }
+
+        public Ship.Ship CreateShip(ShipStaticData shipData, Vector3 at)
+        {
+            var ship = new Ship.Ship();
+            ship.UI = _assetProvider.Instantiate(shipData.Prefab, at);
+            ship.Health.HP.SetAndReset(shipData.HP);
+            ship.Health.Shield.SetAndReset(shipData.Shield, shipData.ShieldIncValue, shipData.ShieldIncCooldown);
+            return ship;
         }
     }
 }

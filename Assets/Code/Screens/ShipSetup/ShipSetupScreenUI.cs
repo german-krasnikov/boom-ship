@@ -1,11 +1,6 @@
 using System;
-using Code.Logic;
-using Code.Logic.Carousel;
-using Code.Screens.ShipSetup.Carousel;
 using Code.StaticData;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Code.Screens.ShipSetup
 {
@@ -25,8 +20,6 @@ namespace Code.Screens.ShipSetup
 
         public void OnStartClick()
         {
-            //_playerShipPanel.GetSelectedShip().Name
-
             StartGame?.Invoke();
         }
     }

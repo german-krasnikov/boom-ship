@@ -11,6 +11,12 @@ namespace Code.Ship.Health
         public List<AdditionalHPModule> AdditionalHpModules = new List<AdditionalHPModule>();
         public bool IsEmpty() => GetTotalHP() <= 0;
 
+        public void SetAndReset(float max)
+        {
+            Max = max;
+            Reset();
+        }
+
         public void Reset()
         {
             Value = Max;

@@ -1,5 +1,6 @@
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
+using Code.Logic;
 using Code.Module.Health;
 using Code.Screens.ShipSetup;
 using Code.World;
@@ -14,7 +15,8 @@ namespace Code.Infrastructure.States
 
         private IGameFactory _factory;
         private World.World _world;
-        private GameObject _shipSetupScreen;
+        private ShipSetupScreenUI _shipSetupScreen;
+        private IAssetProvider _assets;
 
         public ShipSetupState(GameStateMachine stateMachine, AllServices services)
         {
@@ -27,22 +29,18 @@ namespace Code.Infrastructure.States
             RegisterDependencies();
             _shipSetupScreen = _factory.CreateShipSetupScreen();
             ShipSetupScreenUI.StartGame += StartGame;
-            Init();
+            //Init();
         }
 
         public void Exit()
         {
             ShipSetupScreenUI.StartGame -= StartGame;
-            Object.Destroy(_shipSetupScreen);
+            _assets.Destroy(_shipSetupScreen.gameObject);
+            CreateShip();
         }
 
         public void Tick(float deltaTime)
         {
-        }
-
-        private void StartGame()
-        {
-            _stateMachine.Enter<GameLoopState>();
         }
 
         private void RegisterDependencies()
@@ -51,7 +49,43 @@ namespace Code.Infrastructure.States
                 return;
             _world = _services.Single<IWorldService>().World;
             _factory = _services.Single<IGameFactory>();
+            _assets = _services.Single<IAssetProvider>();
         }
+
+        private void StartGame()
+        {
+            _stateMachine.Enter<GameLoopState>();
+        }
+
+        private void CreateShip()
+        {
+            _world.Ship = _factory.CreateShip(_shipSetupScreen.EnemyShipPanel.GetSelectedShip(), new Vector3(0, 0, 0));
+        }
+
+        private void CreateShips()
+        {
+            var assets = _services.Single<IAssetProvider>();
+            var shipUI = assets.Instantiate(AssetPath.ShipPath);
+            var enemyUI = assets.Instantiate(AssetPath.ShipPath, new Vector3(10, 0, 10));
+
+            _world.Ship = new Ship.Ship();
+            var ship = _world.Ship;
+            ship.UI = shipUI;
+            ship.Health.Shield.Value = 90;
+
+            ship.AddModule(_factory.CreateWeapon(shipUI, enemyUI, "RocketLauncher5", 0, 4));
+            ship.AddModule(_factory.CreateWeapon(shipUI, enemyUI, "Shocker5", 1, 0.5f));
+            ship.AddModule(new SpeedupRestoreShieldModule());
+            ship.AddModule(new AdditionalShieldModule { Max = 50, Value = 45 });
+            ship.AddModule(new AdditionalHPModule());
+
+            var enemy = new Ship.Ship();
+            enemy.UI = enemyUI;
+            _world.Enemies.Add(enemy);
+            enemy.AddModule(_factory.CreateWeapon(enemyUI, shipUI, "RocketLauncher5", 0, 4));
+            enemy.AddModule(_factory.CreateWeapon(enemyUI, shipUI, "Gun4", 1, 0.5f));
+        }
+
 
         private void Init()
         {
@@ -63,7 +97,7 @@ namespace Code.Infrastructure.States
             var ship = _world.Ship;
             ship.UI = shipUI;
             ship.Health.Shield.Value = 90;
-            
+
             ship.AddModule(_factory.CreateWeapon(shipUI, enemyUI, "RocketLauncher5", 0, 4));
             ship.AddModule(_factory.CreateWeapon(shipUI, enemyUI, "Shocker5", 1, 0.5f));
             ship.AddModule(new SpeedupRestoreShieldModule());

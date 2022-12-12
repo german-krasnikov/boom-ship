@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Code.Screens.ShipSetup;
+using Code.StaticData;
+using UnityEngine;
 
 namespace Code.Infrastructure.Factory
 {
@@ -6,8 +8,10 @@ namespace Code.Infrastructure.Factory
     {
         GameObject CreateBullet(GameObject at);
         void CreateHud();
-        GameObject CreateShipSetupScreen();
+        ShipSetupScreenUI CreateShipSetupScreen();
         GameObject CreateGameResultScreen();
         public Weapon.Weapon CreateWeapon(GameObject shipUI, GameObject enemyUI, string weaponId, int indexPosition, float cooldown);
+
+        Ship.Ship CreateShip(ShipStaticData getSelectedShip, Vector3 at);
     }
 }
