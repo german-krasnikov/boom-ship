@@ -1,3 +1,5 @@
+using Code.Infrastructure.AssetManagement;
+using Code.Logic;
 using Code.Ship.Health;
 using Code.World;
 using UnityEngine;
@@ -8,11 +10,13 @@ namespace Code.Bullet
     {
         private readonly IHealthService _healthService;
         private readonly World.World _world;
+        private BulletPool _pool;
 
-        public BulletService(IHealthService healthService, IWorldService worldService)
+        public BulletService(IHealthService healthService, IWorldService worldService, IAssetProvider assetProvider)
         {
             _healthService = healthService;
             _world = worldService.World;
+            _pool = new BulletPool(assetProvider);
         }
 
         public void Tick(float tick)
@@ -31,8 +35,20 @@ namespace Code.Bullet
             }
         }
 
-        public void AddBullet(Bullet bullet)
+        public void AddBullet(Ship.Ship enemy, Weapon.Weapon weapon)
         {
+            var bullet = new Bullet
+            {
+                Damage = weapon.Damage,
+                Target = enemy,
+            };
+            bullet.Cooldown.Set(weapon.BulletTime);
+            Debug.Log($"Shot to {enemy.UI.name} {enemy.Health.GetTotal()} {bullet.Cooldown.Current}");
+            var bulletUI = _pool.Get(weapon.UI.BulletSpawnPoint.transform.position);
+            bulletUI.GetComponent<BulletUI>().StartCoroutine(
+                MoveOverSeconds.Move(bulletUI.gameObject, enemy.UI.gameObject, bullet.Cooldown.Current));
+            bullet.UI = bulletUI;
+
             _world.Bullets.Add(bullet);
         }
 
@@ -46,7 +62,7 @@ namespace Code.Bullet
         {
             _healthService.TakeDamage(bullet.Damage, bullet.Target);
             Debug.Log($"MakeDamage {bullet.Damage} {bullet.Target} {bullet.Target.Health.GetTotal()}");
-            Object.Destroy(bullet.UI);
+            _pool.Pool.Release(bullet.UI);
         }
     }
 }

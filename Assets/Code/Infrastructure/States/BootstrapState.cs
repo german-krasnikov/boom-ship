@@ -52,7 +52,9 @@ namespace Code.Infrastructure.States
                 _services.Single<IHPService>()));
             _services.RegisterSingle<IBulletService>(new BulletService(
                 _services.Single<IHealthService>(),
-                _services.Single<IWorldService>()));
+                _services.Single<IWorldService>(),
+                _services.Single<IAssetProvider>()
+            ));
             _services.RegisterSingle<IWeaponService>(new WeaponService(
                 _services.Single<IAssetProvider>(),
                 _services.Single<IBulletService>()));

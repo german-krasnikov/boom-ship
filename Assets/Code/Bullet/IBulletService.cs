@@ -5,6 +5,6 @@ namespace Code.Bullet
     public interface IBulletService : IService
     {
         void Tick(float tick);
-        void AddBullet(Bullet bullet);
+        void AddBullet(Ship.Ship bullet, Weapon.Weapon weapon);
     }
 }

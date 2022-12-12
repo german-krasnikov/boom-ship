@@ -1,4 +1,3 @@
-using Code.Logic;
 using Code.Logic.Carousel;
 using Code.StaticData;
 using TMPro;

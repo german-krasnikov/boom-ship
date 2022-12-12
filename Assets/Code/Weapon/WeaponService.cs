@@ -41,19 +41,8 @@ namespace Code.Weapon
 
         private void Shot(Ship.Ship enemy, Weapon weapon)
         {
-            var bullet = new Bullet.Bullet
-            {
-                Damage = weapon.Damage,
-                Target = enemy,
-            };
-            bullet.Cooldown.Set(weapon.BulletTime);
-            _bulletService.AddBullet(bullet);
             weapon.Cooldown.Reset();
-            Debug.Log($"Shot to {enemy.UI.name} {enemy.Health.GetTotal()} {bullet.Cooldown.Current}");
-            var bulletUI = _assetProvider.Instantiate(AssetPath.BulletPath, weapon.UI.BulletSpawnPoint.transform.position);
-            bulletUI.GetComponent<BulletUI>().StartCoroutine(
-                MoveOverSeconds.Move(bulletUI, enemy.UI.gameObject, bullet.Cooldown.Current));
-            bullet.UI = bulletUI;
+            _bulletService.AddBullet(enemy, weapon);
         }
     }
 }

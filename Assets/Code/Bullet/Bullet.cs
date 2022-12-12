@@ -5,7 +5,7 @@ namespace Code.Bullet
 {
     public class Bullet
     {
-        public GameObject UI;
+        public BulletUI UI;
         public Ship.Ship Target;
         public float Damage;
         public Cooldown Cooldown = new Cooldown(1);

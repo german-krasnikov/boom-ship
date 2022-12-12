@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
-using Code.Logic;
 using Code.Module;
 using Code.Module.Health;
 using Code.Screens.ShipSetup;
