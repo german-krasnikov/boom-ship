@@ -29,5 +29,10 @@ namespace Code.Logic.Carousel
         {
             SetIndex(_index.GetPrevSequenceNumber(_items.Length - 1, 0));
         }
+
+        public T GetSelected()
+        {
+            return _items[_index];
+        }
     }
 }

@@ -2,37 +2,41 @@ using UnityEngine;
 
 namespace Code.Logic.Carousel
 {
-    public class CarouselHelperUI<T> : MonoBehaviour
+    public abstract class CarouselHelperUI<T> : MonoBehaviour
     {
-        public CarouselHelper<T> _carouselHelper = new CarouselHelper<T>();
+        public readonly CarouselHelper<T> CarouselHelper = new CarouselHelper<T>();
 
         public void Init(T[] items)
         {
-            _carouselHelper.Set(items);
+            CarouselHelper.Set(items);
         }
 
         public void OnEnable()
         {
-            _carouselHelper.OnChange += OnChanged;
+            OnChanged(CarouselHelper.GetSelected());
+            CarouselHelper.OnChange += OnChanged;
         }
 
         public void OnDisable()
         {
-            _carouselHelper.OnChange -= OnChanged;
+            CarouselHelper.OnChange -= OnChanged;
         }
 
         public void OnNextClick()
         {
-            _carouselHelper.Next();
+            CarouselHelper.Next();
         }
 
         public void OnPrevClick()
         {
-            _carouselHelper.Prev();
+            CarouselHelper.Prev();
         }
 
-        protected virtual void OnChanged(T value)
+        public T GetSelected()
         {
+            return CarouselHelper.GetSelected();
         }
+
+        protected abstract void OnChanged(T value);
     }
 }

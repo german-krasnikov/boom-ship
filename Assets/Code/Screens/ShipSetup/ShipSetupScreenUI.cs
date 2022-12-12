@@ -14,16 +14,19 @@ namespace Code.Screens.ShipSetup
         public static event Action StartGame;
 
         public GameStaticData GameData;
-        [SerializeField]
-        private ShipSetupPanelUI _playerShipPanel;
+        public ShipSetupPanelUI PlayerShipPanel;
+        public ShipSetupPanelUI EnemyShipPanel;
 
         public void Awake()
         {
-            _playerShipPanel.Init(GameData);
+            PlayerShipPanel.Init(GameData);
+            EnemyShipPanel.Init(GameData);
         }
 
         public void OnStartClick()
         {
+            //_playerShipPanel.GetSelectedShip().Name
+
             StartGame?.Invoke();
         }
     }
