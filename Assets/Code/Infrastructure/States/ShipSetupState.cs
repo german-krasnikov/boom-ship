@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
 using Code.Logic;
+using Code.Module;
 using Code.Module.Health;
 using Code.Screens.ShipSetup;
 using Code.StaticData;
@@ -84,31 +86,42 @@ namespace Code.Infrastructure.States
             var ship = _factory.CreateShip(shipData, position);
             for (int i = 0; i < shipData.WeaponCount; i++)
                 _factory.CreateWeapon(ship, weaponDataList[i], i);
+            for (int i = 0; i < shipData.ModuleCount; i++)
+                CreateModule(ship, moduleDataList[i]);
             return ship;
         }
 
-        /*private void CreateShips()
+        private void CreateModule(Ship.Ship ship, ModuleStaticData moduleData)
         {
-            var assets = _services.Single<IAssetProvider>();
-            var shipUI = assets.Instantiate(AssetPath.ShipPath);
-            var enemyUI = assets.Instantiate(AssetPath.ShipPath, new Vector3(10, 0, 10));
-
-            _world.Ship = new Ship.Ship();
-            var ship = _world.Ship;
-            ship.UI = shipUI.GetComponent<ShipUI>();
-            ship.Health.Shield.Value = 90;
-
-            ship.AddModule(_factory.CreateWeapon(ship.UI, "RocketLauncher5", 0, 4));
-            ship.AddModule(_factory.CreateWeapon(ship.UI, "Shocker5", 1, 0.5f));
-            ship.AddModule(new SpeedupRestoreShieldModule());
-            ship.AddModule(new AdditionalShieldModule { Max = 50, Value = 45 });
-            ship.AddModule(new AdditionalHPModule());
-
-            var enemy = new Ship.Ship();
-            enemy.UI = enemyUI.GetComponent<ShipUI>();
-            _world.Enemies.Add(enemy);
-            enemy.AddModule(_factory.CreateWeapon(enemy.UI, "RocketLauncher5", 0, 4));
-            enemy.AddModule(_factory.CreateWeapon(enemy.UI, "Gun4", 1, 0.5f));
-        }*/
+            switch (moduleData.Type)
+            {
+                case ModuleType.SpeedupReloadWeapon:
+                    ship.AddModule(new SpeedupReloadWeaponModule
+                    {
+                        SpeedupPercent = moduleData.Value
+                    });
+                    break;
+                case ModuleType.AdditionalHP:
+                    ship.AddModule(new AdditionalHPModule
+                    {
+                        Value = moduleData.Value
+                    });
+                    break;
+                case ModuleType.AdditionalShield:
+                    ship.AddModule(new AdditionalShieldModule
+                    {
+                        Value = moduleData.Value
+                    });
+                    break;
+                case ModuleType.SpeedupRestoreShield:
+                    ship.AddModule(new SpeedupRestoreShieldModule
+                    {
+                        SpeedupPercent = moduleData.Value
+                    });
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
     }
 }
