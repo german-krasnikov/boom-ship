@@ -1,4 +1,5 @@
 ﻿using Code.Infrastructure.AssetManagement;
+using Code.Screens;
 using Code.Screens.ShipSetup;
 using Code.StaticData;
 using Code.Weapon;
@@ -40,7 +41,7 @@ namespace Code.Infrastructure.Factory
             return weapon;
         }
 
-        public GameObject CreateGameResultScreen() => _assetProvider.Instantiate(AssetPath.GameResultScreenPath);
+        public GameResultScreenUI CreateGameResultScreen() => _assetProvider.Instantiate(AssetPath.GameResultScreenPath).GetComponent<GameResultScreenUI>();
 
         public Ship.Ship CreateShip(ShipStaticData shipData, Vector3 at)
         {

@@ -12,7 +12,8 @@ namespace Code.Infrastructure.States
 
         private IGameFactory _factory;
         private World.World _world;
-        private GameObject _gameResultScreen;
+        private GameResultScreenUI _gameResultScreen;
+        private IWorldService _worldService;
 
         public GameResultState(GameStateMachine stateMachine, AllServices services)
         {
@@ -24,11 +25,14 @@ namespace Code.Infrastructure.States
         {
             RegisterDependencies();
             CreateAndInitGameResultScreen();
+            GameResultScreenUI.RestartGame += RestartGame;
         }
 
         public void Exit()
         {
-            Object.Destroy(_gameResultScreen);
+            GameResultScreenUI.RestartGame -= RestartGame;
+            Object.Destroy(_gameResultScreen.gameObject);
+            _worldService.Clear();
         }
 
         public void Tick(float deltaTime)
@@ -41,12 +45,18 @@ namespace Code.Infrastructure.States
                 return;
             _world = _services.Single<IWorldService>().World;
             _factory = _services.Single<IGameFactory>();
+            _worldService = _services.Single<IWorldService>();
         }
 
         private void CreateAndInitGameResultScreen()
         {
             _gameResultScreen = _factory.CreateGameResultScreen();
-            _gameResultScreen.GetComponent<GameResultScreenUI>().Set(_world.Ship.Health.IsAlive());
+            _gameResultScreen.Set(_world.Ship.Health.IsAlive());
+        }
+
+        private void RestartGame()
+        {
+            _stateMachine.Enter<ShipSetupState>();
         }
     }
 }
