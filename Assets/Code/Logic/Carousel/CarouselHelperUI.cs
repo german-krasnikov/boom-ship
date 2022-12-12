@@ -4,7 +4,7 @@ namespace Code.Logic.Carousel
 {
     public class CarouselHelperUI<T> : MonoBehaviour
     {
-        private CarouselHelper<T> _carouselHelper = new CarouselHelper<T>();
+        public CarouselHelper<T> _carouselHelper = new CarouselHelper<T>();
 
         public void Init(T[] items)
         {

@@ -14,13 +14,12 @@ namespace Code.Screens.ShipSetup
         public static event Action StartGame;
 
         public GameStaticData GameData;
-        [FormerlySerializedAs("CarouselShip")]
         [SerializeField]
-        private ShipCarouselUI shipCarousel;
+        private ShipSetupPanelUI _playerShipPanel;
 
         public void Awake()
         {
-            shipCarousel.Init(GameData.Ships);
+            _playerShipPanel.Init(GameData);
         }
 
         public void OnStartClick()
