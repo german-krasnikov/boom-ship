@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c1455e1f8a9459186bdc41904fbc599, type: 3}
+  m_Name: Ship1
+  m_EditorClassIdentifier: 
+  Name: Ship A
+  Prefab: {fileID: 3368916564331560363, guid: b3c0a61dfe701344d819eb701e83f4b7, type: 3}
+  HP: 100
+  Shield: 80
+  ShieldIncCooldown: 1
+  ShieldIncValue: 1
+  WeaponCount: 2
+  ModuleCount: 2

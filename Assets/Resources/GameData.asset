@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a06cecc0523f48e7b044338d413f7b8e, type: 3}
+  m_Name: GameData
+  m_EditorClassIdentifier: 
+  Ships:
+  - {fileID: 11400000, guid: 65697954dbbf6432198cf99fea2c4b50, type: 2}
+  - {fileID: 11400000, guid: ae49e7f8d94104a5eb2ee2ef2c74c98b, type: 2}
+  Weapons:
+  - {fileID: 11400000, guid: 1726e782c8ace4e25937236479d0e494, type: 2}
+  - {fileID: 11400000, guid: 0c32bf51b445a4a30aac8e55a8ea796e, type: 2}
+  - {fileID: 11400000, guid: 16a51ba40a89a4a429136219c9c782c3, type: 2}
+  Modules:
+  - {fileID: 11400000, guid: 673432bd9c65047788dc121dec8d4258, type: 2}
+  - {fileID: 11400000, guid: 5b09445d452cb4bf4b3efc0f9333a596, type: 2}
+  - {fileID: 11400000, guid: f56991c896f444515aaa61493d079add, type: 2}
+  - {fileID: 11400000, guid: 1da02a77ae27345e1b05134d04607d70, type: 2}
