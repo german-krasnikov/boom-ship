@@ -28,6 +28,7 @@ namespace Code.Infrastructure.States
 
         public void Tick(float deltaTime)
         {
+            
         }
 
         public void Exit()

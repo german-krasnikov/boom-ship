@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Weapon C
   Prefab: {fileID: 403403146850634004, guid: 5a1cae871f1824ec0802e7f3153068b2, type: 3}
-  Damage: 5
+  Damage: 50
   Cooldown: 20
   BulletTime: 2
