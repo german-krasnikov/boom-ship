@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Code.Screens.ShipSetup.Carousel
 {
-    public class ModuleCarouselUI : CarouselHelperUI<ModuleStaticData>
+    public class ModuleBaseCarouselUI : BaseCarouselUI<ModuleStaticData>
     {
         [SerializeField]
         private TMP_Text _text;
@@ -32,7 +32,7 @@ namespace Code.Screens.ShipSetup.Carousel
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            _text.text = $"{value.Name} -- {value.Type} {description}";
+            _text.text = $"{value.Name}: {value.Type} {description}";
         }
     }
 }

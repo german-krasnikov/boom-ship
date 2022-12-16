@@ -1,18 +1,22 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Logic;
 using Code.Module.Health;
 
-namespace Code.Ship.Health
+namespace Code.Health
 {
     public class Shield
     {
+        public event Action Changed;
+        
         public float Value = 100;
         public float IncValue = 1f;
         public float Max = 100;
         public Cooldown IncCooldown = new Cooldown(1);
         public List<AdditionalShieldModule> AdditionalShields = new List<AdditionalShieldModule>();
         public bool IsEmpty() => GetTotalShield() <= 0;
+
 
         public void SetAndReset(float max, float incValue, float incCooldown)
         {
@@ -26,11 +30,17 @@ namespace Code.Ship.Health
             Value = Max;
             IncCooldown.Reset();
             AdditionalShields.Clear();
+            Changed?.Invoke();
         }
 
         public float GetTotalShield()
         {
             return Value + GetAdditionalShields();
+        }
+
+        public float GetTotalMaxShield()
+        {
+            return Max + GetMaxAdditionalShields();
         }
 
         public void Inc()
@@ -44,6 +54,7 @@ namespace Code.Ship.Health
             else if (GetTotalShield() < Max + GetMaxAdditionalShields())
                 IncAdditionalShields(IncValue);
             IncCooldown.Reset();
+            Changed?.Invoke();
         }
 
         public void TakeDamage(ref float damage)
@@ -60,11 +71,13 @@ namespace Code.Ship.Health
                 }
                 else damage = 0;
             }
+            Changed?.Invoke();
         }
 
         private float GetMaxAdditionalShields() => AdditionalShields.Sum(it => it.Max);
 
         private float GetAdditionalShields() => AdditionalShields.Sum(it => it.Value);
+
 
         private void IncAdditionalShields(float inc)
         {

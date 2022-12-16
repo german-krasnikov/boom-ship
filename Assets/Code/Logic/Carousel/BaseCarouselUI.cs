@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Code.Logic.Carousel
 {
-    public abstract class CarouselHelperUI<T> : MonoBehaviour
+    public abstract class BaseCarouselUI<T> : MonoBehaviour
     {
         public readonly CarouselHelper<T> CarouselHelper = new CarouselHelper<T>();
 

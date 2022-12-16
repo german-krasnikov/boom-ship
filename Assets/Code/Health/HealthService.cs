@@ -1,4 +1,4 @@
-namespace Code.Ship.Health
+namespace Code.Health
 {
     public class HealthService : IHealthService
     {
@@ -11,12 +11,12 @@ namespace Code.Ship.Health
             _hpService = hpService;
         }
 
-        public void Tick(float tick, Ship ship)
+        public void Tick(float tick, Ship.Ship ship)
         {
             _shieldService.Tick(tick, ship);
         }
 
-        public void TakeDamage(float damage, Ship ship)
+        public void TakeDamage(float damage, Ship.Ship ship)
         {
             if (!ship.Health.Shield.IsEmpty())
                 _shieldService.TakeDamage(ref damage, ship);

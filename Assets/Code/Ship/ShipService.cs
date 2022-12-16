@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Code.Bullet;
-using Code.Ship.Health;
+using Code.Health;
 using Code.Weapon;
 
 namespace Code.Ship

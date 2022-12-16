@@ -1,6 +1,6 @@
+using Code.Health;
 using Code.Infrastructure.AssetManagement;
 using Code.Logic;
-using Code.Ship.Health;
 using Code.World;
 using UnityEngine;
 

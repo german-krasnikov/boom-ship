@@ -1,4 +1,4 @@
-namespace Code.Ship.Health
+namespace Code.Health
 {
     public class Health
     {

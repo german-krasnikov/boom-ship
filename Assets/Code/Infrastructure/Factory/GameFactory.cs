@@ -41,12 +41,14 @@ namespace Code.Infrastructure.Factory
             return weapon;
         }
 
-        public GameResultScreenUI CreateGameResultScreen() => _assetProvider.Instantiate(AssetPath.GameResultScreenPath).GetComponent<GameResultScreenUI>();
+        public GameResultScreenUI CreateGameResultScreen() => 
+            _assetProvider.Instantiate(AssetPath.GameResultScreenPath).GetComponent<GameResultScreenUI>();
 
         public Ship.Ship CreateShip(ShipStaticData shipData, Vector3 at)
         {
             var ship = new Ship.Ship();
             ship.UI = _assetProvider.Instantiate(shipData.Prefab, at).GetComponent<ShipUI>();
+            ship.UI.Set(ship);
             ship.Health.HP.SetAndReset(shipData.HP);
             ship.Health.Shield.SetAndReset(shipData.Shield, shipData.ShieldIncValue, shipData.ShieldIncCooldown);
             return ship;

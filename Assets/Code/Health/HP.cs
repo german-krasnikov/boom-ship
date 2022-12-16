@@ -1,11 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Code.Module.Health;
 
-namespace Code.Ship.Health
+namespace Code.Health
 {
     public class HP
     {
+        public event Action Changed;
+
         public float Value = 100;
         public float Max = 100;
         public List<AdditionalHPModule> AdditionalHpModules = new List<AdditionalHPModule>();
@@ -21,11 +24,17 @@ namespace Code.Ship.Health
         {
             Value = Max;
             AdditionalHpModules.Clear();
+            Changed?.Invoke();
         }
 
         public float GetTotalHP()
         {
             return Value + AdditionalHpModules.Sum(it => it.Value);
+        }
+
+        public float GetTotalMaxHP()
+        {
+            return Max + AdditionalHpModules.Sum(it => it.Max);
         }
 
         public void TakeDamage(ref float damage)
@@ -42,6 +51,7 @@ namespace Code.Ship.Health
                 }
                 else damage = 0;
             }
+            Changed?.Invoke();
         }
 
         private float GetAdditionalHP() => AdditionalHpModules.Sum(it => it.Value);
