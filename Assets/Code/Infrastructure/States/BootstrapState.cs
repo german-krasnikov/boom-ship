@@ -1,8 +1,8 @@
 ﻿using Code.Bullet;
+using Code.Health;
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
 using Code.Ship;
-using Code.Ship.Health;
 using Code.Weapon;
 using Code.World;
 
@@ -10,7 +10,6 @@ namespace Code.Infrastructure.States
 {
     public class BootstrapState : IState
     {
-        private const string Initial = "Initial";
         private readonly GameStateMachine _stateMachine;
         private readonly AllServices _services;
 

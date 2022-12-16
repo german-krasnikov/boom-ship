@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.Screens.ShipSetup.Carousel
 {
-    public class ShipCarouselUI : CarouselHelperUI<ShipStaticData>
+    public class ShipBaseCarouselUI : BaseCarouselUI<ShipStaticData>
     {
         [SerializeField]
         private TMP_Text _text;

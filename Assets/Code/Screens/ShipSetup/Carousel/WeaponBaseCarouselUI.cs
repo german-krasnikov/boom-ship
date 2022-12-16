@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Code.Screens.ShipSetup.Carousel
 {
-    public class WeaponCarouselUI : CarouselHelperUI<WeaponStaticData>
+    public class WeaponBaseCarouselUI : BaseCarouselUI<WeaponStaticData>
     {
         [SerializeField]
         private TMP_Text _text;

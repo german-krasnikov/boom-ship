@@ -1,9 +1,9 @@
 using Code.Infrastructure;
 
-namespace Code.Ship.Health
+namespace Code.Health
 {
     public interface IHPService : IService
     {
-        void TakeDamage(ref float damage, Ship ship);
+        void TakeDamage(ref float damage, Ship.Ship ship);
     }
 }

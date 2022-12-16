@@ -103,13 +103,15 @@ namespace Code.Infrastructure.States
                 case ModuleType.AdditionalHP:
                     ship.AddModule(new AdditionalHPModule
                     {
-                        Value = moduleData.Value
+                        Value = moduleData.Value,
+                        Max = moduleData.Value,
                     });
                     break;
                 case ModuleType.AdditionalShield:
                     ship.AddModule(new AdditionalShieldModule
                     {
-                        Value = moduleData.Value
+                        Value = moduleData.Value,
+                        Max = moduleData.Value
                     });
                     break;
                 case ModuleType.SpeedupRestoreShield:

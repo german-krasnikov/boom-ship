@@ -3,36 +3,38 @@ using System.Linq;
 using Code.Screens.ShipSetup.Carousel;
 using Code.StaticData;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Code.Screens.ShipSetup
 {
     public class ShipSetupPanelUI : MonoBehaviour
     {
+        [FormerlySerializedAs("_shipCarousel")]
         [SerializeField]
-        private ShipCarouselUI _shipCarousel;
+        private ShipBaseCarouselUI shipBaseCarousel;
         [SerializeField]
-        private WeaponCarouselUI[] _weaponCarouselList;
+        private WeaponBaseCarouselUI[] _weaponCarouselList;
         [SerializeField]
-        private ModuleCarouselUI[] _moduleCarouselList;
+        private ModuleBaseCarouselUI[] _moduleCarouselList;
 
         public void Init(GameStaticData gameData)
         {
-            _shipCarousel.Init(gameData.Ships);
+            shipBaseCarousel.Init(gameData.Ships);
             foreach (var weaponCarousel in _weaponCarouselList)
                 weaponCarousel.Init(gameData.Weapons);
             foreach (var moduleCarousel in _moduleCarouselList)
                 moduleCarousel.Init(gameData.Modules);
-            ShipCarouselHelperOnOnChange(_shipCarousel.GetSelected());
+            ShipCarouselHelperOnOnChange(shipBaseCarousel.GetSelected());
         }
 
         public void OnEnable()
         {
-            _shipCarousel.CarouselHelper.OnChange += ShipCarouselHelperOnOnChange;
+            shipBaseCarousel.CarouselHelper.OnChange += ShipCarouselHelperOnOnChange;
         }
 
         public void OnDisable()
         {
-            _shipCarousel.CarouselHelper.OnChange -= ShipCarouselHelperOnOnChange;
+            shipBaseCarousel.CarouselHelper.OnChange -= ShipCarouselHelperOnOnChange;
         }
 
         private void ShipCarouselHelperOnOnChange(ShipStaticData ship)
@@ -43,7 +45,7 @@ namespace Code.Screens.ShipSetup
 
         public ShipStaticData GetSelectedShip()
         {
-            return _shipCarousel.CarouselHelper.GetSelected();
+            return shipBaseCarousel.CarouselHelper.GetSelected();
         }
 
         public IEnumerable<WeaponStaticData> GetSelectedWeapons()
